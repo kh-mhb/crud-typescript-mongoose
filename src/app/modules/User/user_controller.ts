@@ -31,8 +31,25 @@ const createUser = async (req: Request, res: Response) => {
       });
     }
   };
+  const GetUsers = async (req: Request, res: Response) => {
+    try {
+      const result = await UserServices.GetUsersFromDB();
+  
+      res.status(200).json({
+        success: true,
+        message: "Users fetched successfully",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: "Somthing went wrong",
+        error: error,
+      });
+    }
+  };
 
   export const UserController = {
-    createUser,
+    createUser,GetUsers
    
   };
