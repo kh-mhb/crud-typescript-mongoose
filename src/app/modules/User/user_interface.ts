@@ -1,4 +1,4 @@
-import { Model, Schema, model, connect } from "mongoose";
+import { Model } from "mongoose";
 
 export type Order = {
   productName: string;
@@ -27,7 +27,8 @@ export type User = {
 };
 
 export type Usermethods = {
+  // eslint-disable-next-line no-unused-vars
   isExists(id: string): Promise<User | null>;
 };
 
-export type UsermethodModel = Model<User, {}, Usermethods>;
+export type UsermethodModel = Model<User, Record<string, never>, Usermethods>;

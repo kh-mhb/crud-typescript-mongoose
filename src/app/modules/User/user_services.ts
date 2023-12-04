@@ -47,11 +47,13 @@ const UpdateOneUser = async (userId: string, user: User) => {
     { userId: userId },
     { password: 0, orders: 0, _id: 0 }
   );
+  // console.log(result);
   return returnResult;
 };
 const DeleteOneUser = async (userId: string) => {
   const result = await UserModel.deleteOne({ userId: userId });
 
+  // console.log(result);
   return result;
 };
 
@@ -91,14 +93,13 @@ const GetTotalPriceOfOrders = async (userId: string) => {
   return result;
 };
 
-  export const UserServices = {
-    CreateUserToDB,
-    GetUsersFromDB,
-    GetTotalPriceOfOrders,
-    GetSingleUserFromDB,
-    UpdateOneUser,
-    DeleteOneUser,
-    addOrder,
-    getOrderFromDB
-
-  };
+export const UserServices = {
+  CreateUserToDB,
+  GetUsersFromDB,
+  GetTotalPriceOfOrders,
+  GetSingleUserFromDB,
+  UpdateOneUser,
+  DeleteOneUser,
+  addOrder,
+  getOrderFromDB,
+};

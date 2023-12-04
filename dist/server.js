@@ -15,11 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
 const port = 5000;
-// import config from './app/config';
+require("dotenv/config");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect('mongodb+srv://user-order-testing:KNyYLAQCi211n8Je@cluster0.37udjhi.mongodb.net/first-task?retryWrites=true&w=majority');
+            yield mongoose_1.default.connect(process.env.DATABASE_URL);
             app_1.default.listen(port, () => {
                 console.log(`app is listening on port ${port}`);
             });
