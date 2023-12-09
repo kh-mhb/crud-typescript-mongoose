@@ -41,7 +41,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
-const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { user } = req.body;
         const { userId } = req.params;
@@ -86,7 +86,7 @@ const editUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield user_services_1.UserServices.GetUsersFromDB();
+        const result = yield user_services_1.UserServices.GetUsers();
         res.status(200).json({
             success: true,
             message: "Users fetched successfully",
@@ -101,7 +101,7 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
         const User = new user_model_1.UserModel();
@@ -132,7 +132,7 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteSpecificUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
         const User = new user_model_1.UserModel();
@@ -197,7 +197,7 @@ const addOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-const getOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
         const User = new user_model_1.UserModel();
@@ -265,10 +265,10 @@ const getTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.UserController = {
     createUser,
     getUsers,
-    editUser,
-    getSingleUser,
-    deleteUser,
-    getOrder,
+    updateUser,
+    getSpecificUser,
+    deleteSpecificUser,
+    getOrders,
     addOrder,
     getTotalPrice,
 };

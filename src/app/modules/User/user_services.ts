@@ -11,7 +11,7 @@ const CreateUserToDB = async (userData: User) => {
 
   return returnResult;
 };
-const GetUsersFromDB = async () => {
+const GetUsers = async () => {
   const result = await UserModel.find(
     {},
     {
@@ -47,13 +47,11 @@ const UpdateOneUser = async (userId: string, user: User) => {
     { userId: userId },
     { password: 0, orders: 0, _id: 0 }
   );
-  // console.log(result);
   return returnResult;
 };
 const DeleteOneUser = async (userId: string) => {
   const result = await UserModel.deleteOne({ userId: userId });
 
-  // console.log(result);
   return result;
 };
 
@@ -95,7 +93,7 @@ const GetTotalPriceOfOrders = async (userId: string) => {
 
 export const UserServices = {
   CreateUserToDB,
-  GetUsersFromDB,
+  GetUsers,
   GetTotalPriceOfOrders,
   GetSingleUserFromDB,
   UpdateOneUser,

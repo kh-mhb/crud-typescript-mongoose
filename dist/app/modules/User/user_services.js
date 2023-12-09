@@ -16,7 +16,7 @@ const CreateUserToDB = (userData) => __awaiter(void 0, void 0, void 0, function*
     const returnResult = yield user_model_1.UserModel.findOne({ userId: result.userId }, { password: 0, orders: 0, _id: 0 });
     return returnResult;
 });
-const GetUsersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+const GetUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.UserModel.find({}, {
         username: 1,
         fullName: 1,
@@ -77,7 +77,7 @@ const GetTotalPriceOfOrders = (userId) => __awaiter(void 0, void 0, void 0, func
 });
 exports.UserServices = {
     CreateUserToDB,
-    GetUsersFromDB,
+    GetUsers,
     GetTotalPriceOfOrders,
     GetSingleUserFromDB,
     UpdateOneUser,

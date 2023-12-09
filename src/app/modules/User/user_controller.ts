@@ -5,8 +5,8 @@ import { orderSchema, userSchemaValidator } from "./user_validator";
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const { user } = req.body;
-    const { error, value } = userSchemaValidator.validate(user);
+   
+    const { error, value } = userSchemaValidator.validate(req.body);
     if (error) {
       res.status(400).json({
         success: false,
@@ -30,16 +30,16 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-const editUser = async (req: Request, res: Response) => {
+const updateUser = async (req: Request, res: Response) => {
   try {
-    const { user } = req.body;
+   
     const { userId } = req.params;
 
     const User = new UserModel();
     const userData = await User.isExists(userId);
 
     if (userData) {
-      const { error } = await userSchemaValidator.validate(user);
+      const { error } = await userSchemaValidator.validate(req.body);
 
       if (error) {
         res.status(400).json({
@@ -48,7 +48,7 @@ const editUser = async (req: Request, res: Response) => {
           error: error.details,
         });
       } else {
-        const result = await UserServices.UpdateOneUser(userId, req.body.user);
+        const result = await UserServices.UpdateOneUser(userId, req.body);
         res.status(200).json({
           success: true,
           message: "User Updated",
@@ -76,7 +76,7 @@ const editUser = async (req: Request, res: Response) => {
 
 const getUsers = async (req: Request, res: Response) => {
   try {
-    const result = await UserServices.GetUsersFromDB();
+    const result = await UserServices.GetUsers();
 
     res.status(200).json({
       success: true,
@@ -92,7 +92,7 @@ const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-const getSingleUser = async (req: Request, res: Response) => {
+const getSpecificUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -124,7 +124,7 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteSpecificUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -189,7 +189,7 @@ const addOrder = async (req: Request, res: Response) => {
   }
 };
 
-const getOrder = async (req: Request, res: Response) => {
+const getOrders = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const User = new UserModel();
@@ -227,7 +227,6 @@ const getTotalPrice = async (req: Request, res: Response) => {
     const userData = await User.isExists(userId);
     if (userData) {
       const result = await UserServices.GetTotalPriceOfOrders(userId);
-      // console.log(result);
       res.status(200).json({
         success: true,
         message: "Total price calculated successfully!",
@@ -255,11 +254,10 @@ const getTotalPrice = async (req: Request, res: Response) => {
   export const UserController = {
     createUser,
   getUsers,
-  editUser,
-  getSingleUser,
-  deleteUser,
-  getOrder,
+  updateUser,
+  getSpecificUser,
+  deleteSpecificUser,
+  getOrders,
   addOrder,
-  getTotalPrice,
-   
+  getTotalPrice
   };
