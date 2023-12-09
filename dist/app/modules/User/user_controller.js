@@ -15,8 +15,7 @@ const user_model_1 = require("./user_model");
 const user_validator_1 = require("./user_validator");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user } = req.body;
-        const { error, value } = user_validator_1.userSchemaValidator.validate(user);
+        const { error, value } = user_validator_1.userSchemaValidator.validate(req.body);
         if (error) {
             res.status(400).json({
                 success: false,
@@ -43,12 +42,11 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user } = req.body;
         const { userId } = req.params;
         const User = new user_model_1.UserModel();
         const userData = yield User.isExists(userId);
         if (userData) {
-            const { error } = yield user_validator_1.userSchemaValidator.validate(user);
+            const { error } = yield user_validator_1.userSchemaValidator.validate(req.body);
             if (error) {
                 res.status(400).json({
                     success: false,
@@ -57,7 +55,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 });
             }
             else {
-                const result = yield user_services_1.UserServices.UpdateOneUser(userId, req.body.user);
+                const result = yield user_services_1.UserServices.UpdateOneUser(userId, req.body);
                 res.status(200).json({
                     success: true,
                     message: "User Updated",
@@ -236,7 +234,6 @@ const getTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const userData = yield User.isExists(userId);
         if (userData) {
             const result = yield user_services_1.UserServices.GetTotalPriceOfOrders(userId);
-            // console.log(result);
             res.status(200).json({
                 success: true,
                 message: "Total price calculated successfully!",
@@ -270,5 +267,5 @@ exports.UserController = {
     deleteSpecificUser,
     getOrders,
     addOrder,
-    getTotalPrice,
+    getTotalPrice
 };

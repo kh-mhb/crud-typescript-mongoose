@@ -39,12 +39,10 @@ const GetSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, functi
 const UpdateOneUser = (userId, user) => __awaiter(void 0, void 0, void 0, function* () {
     yield user_model_1.UserModel.updateOne({ userId: userId }, { $set: user });
     const returnResult = yield user_model_1.UserModel.findOne({ userId: userId }, { password: 0, orders: 0, _id: 0 });
-    // console.log(result);
     return returnResult;
 });
 const DeleteOneUser = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.UserModel.deleteOne({ userId: userId });
-    // console.log(result);
     return result;
 });
 const addOrder = (userId, order) => __awaiter(void 0, void 0, void 0, function* () {

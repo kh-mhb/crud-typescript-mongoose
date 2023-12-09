@@ -1,4 +1,4 @@
-# ass2-module-pattern
+# How To Run
 
 For the /api/users/create-user or to update on /api/users/:userId use this
 format .Make sure you are wraping objects in the "user"
@@ -36,4 +36,4 @@ To run the dist file as production enviornment :
 npm run start:prod
 ```
 
-Live site : https://ass2-module-pattern.vercel.app/
+Live site : https://crud-typescript-mongoose.vercel.app/
